@@ -12,56 +12,59 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="manifest" href="manifest.json">
 <meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <!-- LIVE-DATA-START -->
 <script id="live-data" type="application/json">
 {
- "updatedAt": "13 มิ.ย. 2026 08:54 น. (Yahoo Finance)",
- "updatedAtMs": 1781315690017,
+ "updatedAt": "2026-06-12 ปิดตลาดสหรัฐ (13 มิ.ย. 2026 07:38 น. ไทย)",
+ "updatedAtMs": 1781311080000,
  "fx": {
-  "USD": 32.68,
-  "HKD": 4.1727
+  "USD": 32.6,
+  "HKD": 4.18
  },
  "prices": {
   "ETHA": {
    "price": 12.57,
-   "changePct": 5.9
+   "changePct": null
   },
   "ZS": {
    "price": 129.52,
-   "changePct": -0.96
+   "changePct": 2.7
   },
   "CLSK": {
    "price": 16.48,
-   "changePct": 5.71
+   "changePct": null
   },
   "SHOP": {
    "price": 108.24,
-   "changePct": -1.19
+   "changePct": null
   },
   "MARA": {
    "price": 14.08,
-   "changePct": 14.29
+   "changePct": null
   },
   "BABA": {
    "price": 112.82,
-   "changePct": -6.81
+   "changePct": null
   },
   "0700.HK": {
    "price": 463.6,
-   "changePct": 2.29
+   "changePct": null
   },
   "9988.HK": {
    "price": 110.2,
-   "changePct": -9.97
+   "changePct": null
   },
   "3690.HK": {
    "price": 77.9,
-   "changePct": -2.56
+   "changePct": null
   },
   "9618.HK": {
    "price": 112.6,
-   "changePct": -2.76
+   "changePct": null
   }
  },
  "history": [
@@ -102,25 +105,6 @@
    "fx": {
     "USD": 32.6,
     "HKD": 4.18
-   }
-  },
-  {
-   "d": "2026-06-13",
-   "prices": {
-    "ETHA": 12.57,
-    "ZS": 129.52,
-    "CLSK": 16.48,
-    "SHOP": 108.24,
-    "MARA": 14.08,
-    "BABA": 112.82,
-    "0700.HK": 463.6,
-    "9988.HK": 110.2,
-    "3690.HK": 77.9,
-    "9618.HK": 112.6
-   },
-   "fx": {
-    "USD": 32.68,
-    "HKD": 4.1727
    }
   }
  ],
@@ -427,6 +411,7 @@ input, select { padding: 7px 9px; border: 1px solid #d1d5db; border-radius: 7px;
     </div>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
       <button class="btn green" id="btnUpdate">⟳ อัพเดทตอนนี้</button>
+      <button class="btn" id="btnReload" style="background:#475569;color:#fff;">🔄 รีเฟรชข้อมูลล่าสุด</button>
       <div class="toggle"><button id="curTHB" class="on">฿ THB</button><button id="curUSD">$ USD</button></div>
     </div>
   </div>
@@ -967,6 +952,11 @@ $('btnUpdate').addEventListener('click', async () => {
     alert('สั่งอัพเดทไม่สำเร็จ: ' + (e && e.message ? e.message : e));
   }
   setTimeout(() => { b.disabled = false; b.textContent = '⟳ อัพเดทตอนนี้'; }, 120000);
+});
+$('btnReload').addEventListener('click', () => {
+  const b = $('btnReload');
+  b.disabled = true; b.textContent = '🔄 กำลังโหลด...';
+  location.href = location.pathname + '?v=' + Date.now();
 });
 $('curTHB').addEventListener('click', () => { S.totalCur = 'THB'; render(); });
 $('curUSD').addEventListener('click', () => { S.totalCur = 'USD'; render(); });
